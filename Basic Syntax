@@ -1,0 +1,175 @@
+import pandas as pd
+
+#FIRST IMPORT DATA
+Abook=pd.read_csv('Abook.csv')
+Bbook=pd.read_csv('Bbook.csv')
+#df=pd.read_csv('Cbook.csv') #may use index_col= for identify index
+#bg=pd.read_csv('bigmac.csv')
+#B=pd.read_csv('Box.csv')
+
+#PART i.FILTER DATA
+#Y=pd.DataFrame(Abook,columns=['A','B']) #use Framedata to focus only you want to do
+#X21=df.sample(n=10) #show sample column
+#Abook.describe()
+#Abook.head()
+#X=df['sex'] #select on column
+#X1=df[['sex','salary']] #select two or more column, can change arrange
+#X2=df.assign(job='ok') #if assign by row use [1,2,3,4] for 'ok'
+#X3=df.assign(salary_2=lambda x:x.salary/2) #condition add column
+#X4=df['salary']+4 #add condition on column
+#X5=df.dropna() #cut the row N/A out, please scorll down to sample (hover dropna)
+#X6=df.fillna(500,inplace=True) #fill NA with 500
+#X7=df.astype({'salary':'int'}) # change data type
+#X8=df.sort_values(by=['salary','year'],ascending=False) #sort data by 2 priority column and can use lambda function
+#Abook.rename(columns={'B':'cost'},inplace=True) #rename column
+#Abook.sort_values(by='B',ascending=True) #sort data table B min to max
+#Bbook.sort_values('name',axis=0,ascending=True) #sort data column 'name' axis=0 row, 1 colunm
+#Abook['Sex'].unique()
+#Abook['Sex'].nunique()
+#Abook['Sex'].value_counts()['male']
+#Abook['Sex'].value_counts()
+#stoke['smoking_status'].replace(['formerly smoked', 'never smoked', 'smokes', 'Unknown'],[0,1,2,3],inplace=True) #replace data
+#X21=df.nlargest(5,'salary',keep='all') #nsamllest
+#X=pd.DataFrame(DropA,columns=['BPC','barcode','GT_code','Appearance_Judge','X-ray_judge'])
+
+
+
+#implace is replace but not save, it keep in memory
+
+#condition sorting.Great!!!!
+
+#mask1=df['sex']!='male'
+#X10=df[mask1]
+
+
+#maskA=df['year']>1
+#maskB=df['year']<5
+#X11=df[maskA & maskB] #& and | or
+
+#mask2=df['position'].isin(['staff','expert staff','manager'])
+#X12=df[mask2]
+
+#NAN=df['salary'].notnull() #isnull
+#X13=df[NAN]
+
+
+#BE=df['salary'].between(600,1000) #between condition
+#X13=df[BE]
+
+
+#X14=df.drop_duplicates(subset=['position'],keep='first')
+
+#X.loc[X['Appearance_Judge']==1,'Appearance_Judge']='Pass'  replace data
+#X.loc[X['Appearance_Judge']==2,'Appearance_Judge']='NG'    replace data
+
+#condtion that only 1 result then link condtion together for filling
+#BZ=pd.DataFrame(B,columns=['No','Box_kg','sex','Box_min','Box_max','Box_judge'])  #prepare column need
+#Bnew=BZ.assign(Box_kg=lambda x:x.Box_kg-2) #cal form old column if wnat to make new column may add Box_kg_actual
+#Bnewnew=Bnew.assign(Box_min=lambda x:x.Box_kg-2,Box_max=lambda x:x.Box_kg+5)
+#Bf=Bnewnew.Box_kg.isnull()==False #check column must be data
+#Bt=Bnewnew.Box_kg.isnull()==True #check column must be no data
+#Box_pass_min=B['Box_kg'] >= Bnewnew['Box_min']
+#Box_pass_max=B['Box_kg'] <= Bnewnew['Box_max']
+#Box_ng_min=B['Box_kg'] < Bnewnew['Box_min']
+#Box_ng_max=B['Box_kg'] > Bnewnew['Box_max']
+#Bnewnew['Box_judge'] = Bnewnew['Box_judge'].mask(Box_pass_min & Box_pass_max & Bf, 'Pass')
+#Bnewnew['Box_judge'] = Bnewnew['Box_judge'].mask(Box_ng_max | Box_ng_min & Bf, 'NG')
+#Bnewnew['Box_judge'] = Bnewnew['Box_judge'].mask(Bt, 'N/A')
+
+
+
+
+
+#PART ii. EXTRACT DATA  COLUMN AND ROW
+#!! assign index then use that ot loc####
+#X15=df.set_index('name')
+#X16=X15.loc['bill'] #X15 not df
+#X17=X15.loc['bill','salary']=2000 #assign specific cell
+#X18=X15.loc['bill',['salary','sex','year']]=[3000,'female',10] #assign all new
+#Abook.iloc[0:1,1:3] #slice [interger row, interger column]
+#Abook.iloc[:2,:3]
+#Abook.loc[1,'A'] #slice [key row, key column] head keyword
+#Abook.loc[:,'A']
+#Abook.loc[1:2,['B','A']]
+#Abook.loc[Abook['Sex']!='male'] #condition
+#Abook.loc[Abook['B']>100] #condition
+#X20=df.drop(index=[4,5],columns=['name','year'], axis='columns') #cut,row or column off
+
+#filter=df['salary']
+#X22=df.where(filter>500) #conditon where
+
+#X23=df.query('salary >500') #most flexible extraction
+
+#PART iii. TEXT
+#X24=df['name'].str.upper() #change to BIG change to small lower()
+#X25=df['name'].str.replace('toon','tie') #replace to another data
+#Bbook[Bbook['Sex'].str.contains('male')] #focus keyword ##### may include .str.startwith, endwith
+
+#PART iv.STAT
+#X26=df['salary'].sum()
+#X27=df['salary'].std()
+#X28=df['salary'].nlargest(5)
+
+#PART v.ROW AND COLUMN TRANSFORMING
+#M=bg.head(3)
+#M1=bg.set_index(keys=['Date','Country']) #transform table by category Date and Country
+
+#sorting data from level
+#bg=pd.read_csv('bigmac.csv',parse_dates=['Date'],index_col=['Date','Country'])
+#bg.sort_index(inplace=True)
+#M2=bg.index.get_level_values('Country')
+#M3=bg.index[0]
+#M4=bg.index.set_names(names=['day','location'],inplace=True) #Change index name may set level index =0 or date
+#M5=bg.sort_index(ascending=[True,True]) #sort index 2 column may set level include
+#M6=bg.transpose() #transpose data
+#M7=bg.swaplevel() #change level index may set name in parentheses
+
+#wd=pd.read_csv('worldstats.csv',index_col=['country','year'])
+#M8=wd.stack() #stack data may use to_frame()
+#M9=M8.unstack() #may use unstack to break again or assign level
+
+#sm=pd.read_csv('salesmen.csv',parse_dates=['Date'])
+#M10=sm.pivot(index='Date',columns='Salesman',values='Revenue') #pivot data
+#food=pd.read_csv('foods.csv')
+#M11=food.pivot_table(values='Spend',index=['Gender','Item'],aggfunc='sum') #stat data column
+
+#qt=pd.read_csv('quarters.csv')
+#M12=pd.melt(qt,id_vars='Salesman',var_name='Quarter',value_name='Revenue') #melt multi column to 1 column
+
+#PART vi. Group object
+#ft=pd.read_csv('fortune1000.csv',index_col='Rank')
+#Sector=ft.groupby('Sector')
+#G1=Sector.first()
+#G2=Sector.get_group('Energy')
+#G3=Sector.min()
+#G4=Sector['Employees'].mean()
+#G5=Sector[['Employees','Revenue']].mean()
+#G6=Sector.agg({'Revenue':'sum','Profits':'sum','Employees':'mean'})
+
+
+
+#PART VII.MERGING, JOINT MULTIPLE DATA FRAME
+#C=pd.merge(Abook,Bbook,on='index')
+#D=pd.merge(Abook[['index','A','B']],Bbook[['index','C','D']],on='index')
+E=Bbook.merge(Abook,on='index',how='left')
+E.to_csv('E.csv')
+#F=Bbook.merge(Abook,on='index',how='outer')
+#cu1=pd.read_csv('BC_verify_15_16.csv')
+#cu1['barcode']=cu1['barcode'].str.strip() #very important please check blanck space if can't merge use this
+#function to eliminate space
+
+#w1=pd.read_csv('Restaurant - Week 1 Sales.csv')
+#w2=pd.read_csv('Restaurant - Week 2 Sales.csv')
+#C1=pd.read_csv('Restaurant - Customers.csv')
+#1=pd.read_csv('Restaurant - Foods.csv')
+
+#T1=pd.concat(objs=[w1,w2],ignore_index=False,keys=['w1','w2']) #add data below, beware ignore_index
+
+
+
+#PART vii. FINISHED EXPORT
+#C.to_csv('outer joint.csv')
+#import export to excel use 'pip install xlrd
+
+#ETC
+#data4=data4.assign(Defect_Ratio=(data4['count']/data4['CURING_ACTUAL'])*100).round(decimals=3) #use .round to set decimals
